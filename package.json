@@ -1,12 +1,14 @@
 {
   "name": "tokenz",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "esm.js",
   "module": "tokenz.js",
   "files": [
     "esm.js",
+    "tokenz.js",
     "src"
   ],
+  "author": "gtarsia <guidotarsia@gmail.com>",
   "license": "MIT",
   "scripts": {
     "esw": "esw src",
