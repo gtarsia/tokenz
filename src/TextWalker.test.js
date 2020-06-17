@@ -1,5 +1,4 @@
 import test from 'ava'
-import dummee from 'dummee'
 import TextWalker from './TextWalker'
 import peek from './peek'
 import read from './read'
@@ -10,10 +9,7 @@ import skipUntilNot from './skip-until-not'
 import match from './match'
 import indexOfMany from './string/index-of-many'
 import indexOfManyNot from './string/index-of-many-not'
-import {
-  WalkCancelledInterrupt,
-  WalkFailedInterrupt,
-} from './interrupts'
+import walk from './walk'
 
 function inst() {
   return new TextWalker('')
@@ -103,26 +99,11 @@ test('TextWalker.nextIndexOfNot should be called correctly', (t) => {
   t.deepEqual(indexOfManyNot.calls.shift(), { args: [w.text, strs, w.pos] })
 })
 
-test('TextWalker.cancel should be called correctly', (t) => {
-  const msg = 'msg'
+test('TextWalker.walk should be called correctly', (t) => {
+  const result = Symbol('result')
+  walk.cb = () => result // don't call it
   const w = inst()
-  const err = t.throws(() => w.cancel(msg), { instanceOf: WalkCancelledInterrupt })
-  t.deepEqual(err.message, msg)
-})
-
-test('TextWalker.fail should be called correctly', (t) => {
-  const msg = 'msg'
-  const w = inst()
-  const err = t.throws(() => w.fail(msg), { instanceOf: WalkFailedInterrupt })
-  t.deepEqual(err.message, msg)
-})
-
-test('TextWalker.failIfEnd should be called correctly', (t) => {
-  const msg = 'msg'
-  const w = inst()
-  w.isEnd = dummee(() => true)
-  const err = t.throws(() => w.failIfEnd(msg), { instanceOf: WalkFailedInterrupt })
-  t.deepEqual(err.message, msg)
-  w.isEnd.cb = () => false
-  t.notThrows(() => w.failIfEnd(msg))
+  const fns = Symbol('fns')
+  t.deepEqual(w.walk(fns), result)
+  t.deepEqual(walk.calls.shift(), { args: [w, fns] })
 })

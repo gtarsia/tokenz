@@ -7,16 +7,12 @@ import match from './match'
 import skipUntilNot from './skip-until-not'
 import indexOfMany from './string/index-of-many'
 import indexOfManyNot from './string/index-of-many-not'
-import {
-  WalkCancelledInterrupt,
-  WalkFailedInterrupt,
-} from './interrupts'
+import walk from './walk'
 
 export default class TextWalker {
   constructor(text) {
     this.pos = 0
     this.text = text
-    this.snaps = []
   }
 
   isEnd() {
@@ -59,38 +55,7 @@ export default class TextWalker {
     return indexOfManyNot(this.text, strs, this.pos) - this.pos
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  cancel(msg) {
-    throw new WalkCancelledInterrupt(msg)
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  fail(msg) {
-    throw new WalkFailedInterrupt(msg)
-  }
-
-  failIfEnd(msg) {
-    if (this.isEnd()) {
-      throw new WalkFailedInterrupt(msg)
-    }
-  }
-
   walk(fns) {
-    let token = null
-    fns.find((fn) => {
-      this.snaps.push(this.pos)
-      try {
-        token = fn()
-      } catch (err) {
-        if (/Cancelled/.test(err.name)) {
-          this.pos = this.snaps.pop()
-          return null
-        }
-        throw err
-      }
-      this.snaps.pop()
-      return token
-    })
-    return token
+    return walk(this, fns)
   }
 }
