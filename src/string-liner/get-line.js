@@ -8,7 +8,8 @@ function getLine(liner, i = 1) {
   const lineCount = lineIndexes.length
   if (i > lineCount) {
     throw new Error(
-      `getLine arg was ${i} but shouldn't more than number of lines which is ${lineCount})`)
+      `getLine arg was ${i} but shouldn't more than number of lines which is ${lineCount})`,
+    )
   }
   const start = lineIndexes[i - 1]
   const end = lineIndexes[i] || text.length

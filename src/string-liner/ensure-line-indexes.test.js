@@ -1,5 +1,4 @@
 import test from 'ava'
-import dummee from 'dummee'
 import ensureLineIndexes from './ensure-line-indexes'
 import indexesOfLines from '../string/indexes-of-lines'
 

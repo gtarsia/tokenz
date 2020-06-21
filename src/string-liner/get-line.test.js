@@ -1,5 +1,4 @@
 import test from 'ava'
-import dummee from 'dummee'
 import getLine from './get-line'
 
 test('getLine should fail when trying to obtain line invalid lines', (t) => {

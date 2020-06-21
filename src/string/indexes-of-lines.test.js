@@ -1,5 +1,4 @@
 import test from 'ava'
-import dummee from 'dummee'
 import indexesOfLines from './indexes-of-lines'
 
 test('indexesOfLines should work correctly', (t) => {
