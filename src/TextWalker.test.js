@@ -1,5 +1,6 @@
 import test from 'ava'
 import TextWalker from './TextWalker'
+import StringLiner from './string-liner/StringLiner'
 import peek from './peek'
 import read from './read'
 import skip from './skip'
@@ -12,11 +13,20 @@ import indexOfManyNot from './string/index-of-many-not'
 import walk from './walk'
 import createToken from './create-token'
 
+test('TextWalker should be initialized properly', (t) => {
+  const text = Symbol('text')
+  const walker = new TextWalker(text)
+  t.deepEqual(walker.text, text)
+  t.deepEqual(walker.pos, 0)
+  t.deepEqual(walker.liner, new StringLiner(text))
+})
+
 function inst() {
   return new TextWalker('')
 }
 
-test('TextWalker.call should be called correctly', (t) => {
+
+test('TextWalker.peek should be called correctly', (t) => {
   const peekResult = Symbol('peekResult')
   peek.cb = () => peekResult // don't call it
   const i = Symbol('i')
@@ -113,7 +123,7 @@ test('TextWalker.createToken should be called correctly', (t) => {
   const result = Symbol('result')
   createToken.cb = () => result // don't call it
   const w = inst()
-  const type = Symbol('type')
-  t.deepEqual(w.createToken(type), result)
-  t.deepEqual(createToken.calls.shift(), { args: [w, type] })
+  const tokenType = Symbol('tokenType')
+  t.deepEqual(w.createToken(tokenType), result)
+  t.deepEqual(createToken.calls.shift(), { args: [w, tokenType] })
 })

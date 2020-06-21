@@ -4,6 +4,12 @@ import ensureLineIndexes from './ensure-line-indexes'
 import getLine from './get-line'
 import getLineColumnNumber from './get-line-column-number'
 
+test('StringLiner should initialize correctly', (t) => {
+  const text = Symbol('text')
+  const liner = new StringLiner(text)
+  t.deepEqual(liner.text, text)
+})
+
 test('String liner should call getLine properly', (t) => {
   ensureLineIndexes.cb = () => {} // don't actually call it
   getLine.cb = () => {} // don't actually call it
