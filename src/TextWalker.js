@@ -1,3 +1,4 @@
+import StringLiner from './string-liner/StringLiner'
 import peek from './peek'
 import read from './read'
 import skip from './skip'
@@ -8,11 +9,13 @@ import skipUntilNot from './skip-until-not'
 import indexOfMany from './string/index-of-many'
 import indexOfManyNot from './string/index-of-many-not'
 import walk from './walk'
+import createToken from './create-token'
 
 export default class TextWalker {
   constructor(text) {
     this.pos = 0
     this.text = text
+    this.liner = new StringLiner(text)
   }
 
   isEnd() {
@@ -57,5 +60,9 @@ export default class TextWalker {
 
   walk(fns) {
     return walk(this, fns)
+  }
+
+  createToken(type) {
+    return createToken(this, type)
   }
 }

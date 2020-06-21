@@ -10,6 +10,7 @@ import match from './match'
 import indexOfMany from './string/index-of-many'
 import indexOfManyNot from './string/index-of-many-not'
 import walk from './walk'
+import createToken from './create-token'
 
 function inst() {
   return new TextWalker('')
@@ -106,4 +107,13 @@ test('TextWalker.walk should be called correctly', (t) => {
   const fns = Symbol('fns')
   t.deepEqual(w.walk(fns), result)
   t.deepEqual(walk.calls.shift(), { args: [w, fns] })
+})
+
+test('TextWalker.createToken should be called correctly', (t) => {
+  const result = Symbol('result')
+  createToken.cb = () => result // don't call it
+  const w = inst()
+  const type = Symbol('type')
+  t.deepEqual(w.createToken(type), result)
+  t.deepEqual(createToken.calls.shift(), { args: [w, type] })
 })
