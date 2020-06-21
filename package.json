@@ -1,6 +1,6 @@
 {
   "name": "tokenz",
-  "version": "0.1.0-3",
+  "version": "0.1.0-4",
   "main": "esm.js",
   "module": "tokenz.js",
   "files": [
