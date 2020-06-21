@@ -85,9 +85,9 @@ test('TextWalker.match should be called correctly', (t) => {
   match.cb = () => result // don't call it
   const w = inst()
   const firstArg = Symbol('firstArg')
-  debugger
-  t.deepEqual(w.match(firstArg), result)
-  t.deepEqual(match.calls.shift(), { args: [w, firstArg] })
+  const pos = Symbol('pos')
+  t.deepEqual(w.match(firstArg, pos), result)
+  t.deepEqual(match.calls.shift(), { args: [w, firstArg, pos] })
 })
 
 test('TextWalker.nextIndexOf should be called correctly', (t) => {

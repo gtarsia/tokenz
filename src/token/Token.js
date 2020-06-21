@@ -1,7 +1,7 @@
 
 export default class Token {
-  constructor(tokenType, args = {}) {
-    Object.assign(this, args)
+  constructor(tokenType, props = {}) {
+    Object.assign(this, props)
     this.tokenType = tokenType
   }
 }

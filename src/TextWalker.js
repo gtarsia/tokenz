@@ -46,8 +46,8 @@ export default class TextWalker {
     return skipUntilNot(this, strs)
   }
 
-  match(strs) {
-    return match(this, strs)
+  match(strs, i) {
+    return match(this, strs, i)
   }
 
   nextIndexOf(strs) {

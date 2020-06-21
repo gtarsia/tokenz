@@ -11,4 +11,7 @@ test('match should work correctly', (t) => {
   t.deepEqual(match(w, ['q', 'w', '1']), true)
   t.deepEqual(match(w, ['q', 'w', 'e']), false)
   t.deepEqual(match(w, ['q', 'w', '1a']), true)
+
+  t.deepEqual(match(w, 's', 2), true)
+  t.deepEqual(match(w, ['q', 'd'], 3), true)
 })
