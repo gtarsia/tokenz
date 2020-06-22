@@ -12,6 +12,5 @@ test('createToken should work correctly', (t) => {
   const walker = { pos, liner }
   const tokenType = Symbol('tokenType')
   t.deepEqual(createToken(walker, tokenType),
-    new Token(tokenType, { pos, lineNumber, columnNumber }))
-  t.deepEqual(getLineColumnNumber.calls, [{ args: [pos] }])
+    new Token(tokenType, { pos }, liner))
 })
