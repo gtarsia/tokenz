@@ -9,8 +9,9 @@ test('createToken should work correctly', (t) => {
   const getLineColumnNumber = dummee(() => ({ lineNumber, columnNumber }))
   const liner = { getLineColumnNumber }
   const pos = Symbol('pos')
+  const prop = Symbol('prop')
   const walker = { pos, liner }
   const tokenType = Symbol('tokenType')
-  t.deepEqual(createToken(walker, tokenType),
-    new Token(tokenType, { pos }, liner))
+  t.deepEqual(createToken(walker, tokenType, { prop }),
+    new Token(tokenType, { pos, prop }, liner))
 })

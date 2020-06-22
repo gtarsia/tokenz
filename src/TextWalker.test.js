@@ -124,6 +124,7 @@ test('TextWalker.createToken should be called correctly', (t) => {
   createToken.cb = () => result // don't call it
   const w = inst()
   const tokenType = Symbol('tokenType')
-  t.deepEqual(w.createToken(tokenType), result)
-  t.deepEqual(createToken.calls.shift(), { args: [w, tokenType] })
+  const props = Symbol('props')
+  t.deepEqual(w.createToken(tokenType, props), result)
+  t.deepEqual(createToken.calls.shift(), { args: [w, tokenType, props] })
 })

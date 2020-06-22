@@ -62,7 +62,7 @@ export default class TextWalker {
     return walk(this, fns)
   }
 
-  createToken(tokenType) {
-    return createToken(this, tokenType)
+  createToken(tokenType, props) {
+    return createToken(this, tokenType, props)
   }
 }
